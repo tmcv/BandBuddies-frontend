@@ -22,7 +22,7 @@ export default function Listings() {
 
   // console.log(user)
   const visibleListings = filterForUser ? listings.filter(listing => {
-    return listing.minimumLevel <= user.level
+    return listing.minimumLevel <= user.level && listing.isBand !== user.isBand
   }) : listings;
 
   return (
