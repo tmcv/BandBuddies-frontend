@@ -3,6 +3,7 @@ import './App.css';
 
 import {Switch, Route} from "react-router-dom";
 import Loading from "./components/Loading";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
