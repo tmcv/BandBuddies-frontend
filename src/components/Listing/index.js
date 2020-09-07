@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 export default function Listing(props) {
-  console.log("props:", props)
+  // console.log("props:", props)
 
   return (
     <Jumbotron>
@@ -13,7 +13,7 @@ export default function Listing(props) {
       <p>Description: {props.description}</p>
       {props.showLink ? (
         <Link to={`/listings/${props.id}`}>
-          <Button>Details</Button>
+          <Button>Contact User</Button>
         </Link>
       ) : null}
     </Jumbotron>

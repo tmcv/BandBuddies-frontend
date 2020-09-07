@@ -28,14 +28,14 @@ const tokenStillValid = userWithoutToken => ({
 
 export const logOut = () => ({ type: LOG_OUT });
 
-export const signUp = (username, email, password, name, isBand, minimumLevel) => {
+export const signUp = (username, email, password, name, isBand, level) => {
   console.log("INSIDE SIGNUP FUNCTION", {
     username,
     email,
     password,
     name,
     isBand,
-    minimumLevel
+    level
   })
   return async (dispatch, getState) => {
     dispatch(appLoading());
@@ -46,7 +46,7 @@ export const signUp = (username, email, password, name, isBand, minimumLevel) =>
         password,
         name,
         isBand,
-        minimumLevel
+        level
       });
 
       console.log("RESPONSE DATA", response.data)
