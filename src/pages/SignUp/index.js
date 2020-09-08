@@ -98,6 +98,20 @@ export default function SignUp() {
           />
         </Form.Group>
 
+        <Form.Group controlId="exampleForm.ControlSelect1">
+          <Form.Label>Select your level</Form.Label>
+          <Form.Control as="select" onChange={event => {
+            console.log("level is currently:", event.target.value)
+            setLevel(event.target.value)
+          }}>
+            <option value={1}>1: beginner</option>
+            <option value={2}>2: intermediate</option>
+            <option value={3}>3: advanced</option>
+            <option value={4}>4: semi-professional</option>
+            <option value={5}>5: professional</option>
+          </Form.Control>
+        </Form.Group>
+
         <input type = "checkbox" id = "checkBand" value = {!isBand} onChange={event => {
           console.log("EVENT-TARGET-VALUE", event.target.value)
           setIsBand(event.target.value)

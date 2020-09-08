@@ -22,13 +22,16 @@ export const fetchListings = () => {
   };
 };
 
-export const createListing = (title, minimumLevel, description) => {
+export const createListing = (title, minimumLevel, description, style, instrument, isBand) => {
   return async (dispatch, getState) => {
     const state = getState();
     const response = await axios.post(`${apiUrl}/listings`, {
       title,
       minimumLevel,
-      description
+      description,
+      style,
+      instrument,
+      isBand
     }, {
       headers: { Authorization: `Bearer ${selectToken(state)}` }
     })
