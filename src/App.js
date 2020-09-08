@@ -3,6 +3,7 @@ import './App.css';
 
 import {Switch, Route} from "react-router-dom";
 import Loading from "./components/Loading";
+import Navigation from "./components/Navigation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navigation />
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={Homepage} />
