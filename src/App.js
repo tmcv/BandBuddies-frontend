@@ -12,6 +12,8 @@ import Homepage from './pages/Homepage';
 import Listings from './pages/Listings';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import CreateListing from './pages/CreateListing';
+import ListingCreated from './pages/CreateListing/listingCreated';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +31,8 @@ function App() {
         <Route path="/listings" component={Listings} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
+        <Route path="/create-listing" component={CreateListing} />
+        <Route path="/listing-created" component={ListingCreated} />
       </Switch>
     </div>
   );
