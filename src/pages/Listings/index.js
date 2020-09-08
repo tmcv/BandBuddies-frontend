@@ -12,7 +12,7 @@ export default function Listings() {
   const dispatch = useDispatch();
   const listings = useSelector(selectListings);
   const user = useSelector(selectUser);
-  const [filterForUser, setFilterForUser] = useState(true)
+  const [filterForUser, setFilterForUser] = useState(user.token ? true : false)
 
   useEffect(() => {
     dispatch(fetchListings());
@@ -20,7 +20,7 @@ export default function Listings() {
   
   // console.log("listings:", listings)
 
-  // console.log(user)
+  console.log("USER:", user)
   const visibleListings = filterForUser ? listings.filter(listing => {
     return listing.minimumLevel <= user.level && listing.isBand !== user.isBand
   }) : listings;
@@ -31,9 +31,11 @@ export default function Listings() {
         <h1>Listings</h1>
       </Jumbotron>
       <Container>
-        <Form.Group controlId="formBasicCheckbox">
-          <Form.Check checked={filterForUser} type="checkbox" label="Filter for me!" onChange={() => setFilterForUser(!filterForUser)}/>
-        </Form.Group>
+        {user.token ? 
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check checked={filterForUser} type="checkbox" label="Filter for me!" onChange={() => setFilterForUser(!filterForUser)}/>
+          </Form.Group> : <div> Please login to filter for personalised listings </div>
+        }
         {visibleListings.map(listing => {
           return (
             <Listing
