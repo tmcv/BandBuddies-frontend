@@ -148,7 +148,7 @@ export default function SignUp() {
             <Form.Label>Select your instrument</Form.Label>
             <Form.Control as="select" onChange={event => {
               console.log("instrument is currently:", event.target.value)
-              setStyle(event.target.value)
+              setInstrument(event.target.value)
             }}>
               <option />
               {instruments.map(i => {
