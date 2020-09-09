@@ -4,6 +4,10 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { signUp } from "../../store/user/actions";
 import { selectToken } from "../../store/user/selectors";
+import { selectStyles } from "../../store/styles/selectors";
+import { selectInstruments } from "../../store/instruments/selectors";
+import { fetchStyles } from "../../store/styles/actions";
+import { fetchInstruments } from "../../store/instruments/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
@@ -15,9 +19,13 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [isBand, setIsBand] = useState(false);
   const [level, setLevel] = useState(1);
+  const [style, setStyle] = useState();
+  const [instrument, setInstrument] = useState();
   console.log("ISBAND AT THE START", isBand)
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
+  const styles = useSelector(selectStyles);
+  const instruments = useSelector(selectInstruments);
   const history = useHistory();
 
   useEffect(() => {
@@ -25,6 +33,14 @@ export default function SignUp() {
       history.push("/");
     }
   }, [token, history]);
+
+  useEffect (() => {
+    dispatch(fetchStyles());
+    dispatch(fetchInstruments());
+  }, [dispatch]);
+
+  console.log({styles})
+  console.log({instruments})
 
   function submitForm(event) {
     event.preventDefault();
@@ -38,14 +54,16 @@ export default function SignUp() {
       level
     })
 
-    dispatch(signUp(username, email, password, name, isBand, level));
+    dispatch(signUp(username, email, password, name, isBand, level, style, instrument));
 
     setUsername("");
     setEmail("");
     setPassword("");
     setName("");
     setIsBand(isBand);
-    setLevel(1) 
+    setLevel(1);
+    setStyle();
+    setInstrument();
   }
 
   return (
@@ -98,7 +116,7 @@ export default function SignUp() {
           />
         </Form.Group>
 
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group controlId="form.level">
           <Form.Label>Select your level</Form.Label>
           <Form.Control as="select" onChange={event => {
             console.log("level is currently:", event.target.value)
@@ -112,11 +130,37 @@ export default function SignUp() {
           </Form.Control>
         </Form.Group>
 
-        <input type = "checkbox" id = "checkBand" value = {!isBand} onChange={event => {
-          console.log("EVENT-TARGET-VALUE", event.target.value)
-          setIsBand(event.target.value)
-        }}/>
-        <label for = "checkBand"> We are a band </label>
+        <Form.Group controlId="form.styles">
+          <Form.Label>Select your style</Form.Label>
+          <Form.Control as="select" onChange={event => {
+            console.log("style is currently:", event.target.value)
+            setStyle(event.target.value)
+          }}>
+            <option />
+            {styles.map(s => {
+              return <option key={s.id} value={s.id}>{s.title}</option>
+            })}
+          </Form.Control>
+        </Form.Group>
+        
+        {isBand ? null : (
+          <Form.Group controlId="form.instruments">
+            <Form.Label>Select your instrument</Form.Label>
+            <Form.Control as="select" onChange={event => {
+              console.log("instrument is currently:", event.target.value)
+              setInstrument(event.target.value)
+            }}>
+              <option />
+              {instruments.map(i => {
+                return <option key={i.id} value={i.id}>{i.title}</option>
+              })}
+            </Form.Control>
+          </Form.Group>
+        )}
+
+        <Form.Group controlId="form.isBand">
+          <Form.Check checked={isBand} type="checkbox" label="We are a band" onChange={() => setIsBand(!isBand)}/>
+        </Form.Group>
         
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit" onClick={submitForm}>

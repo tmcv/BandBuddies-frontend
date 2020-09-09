@@ -1,0 +1,1 @@
+export const selectInstruments = state => state.instruments;
