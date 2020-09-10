@@ -36,7 +36,7 @@ export default function ListingDetails(props) {
       {props.showLink ? (
         <div>
           <Link to={token ? `/mail` : `/login`}>
-            <Button>Get in Touch!</Button>
+            <Button variant="dark">Get in Touch!</Button>
           </Link>
         </div>
       ) : null}

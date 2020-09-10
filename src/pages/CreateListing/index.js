@@ -118,7 +118,7 @@ export default function CreateListing() {
         <label for = "checkBand"> We are a band </label>
          */}
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button variant="dark" type="submit" onClick={submitForm}>
             Create Listing
           </Button>
         </Form.Group>

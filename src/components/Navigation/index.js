@@ -14,8 +14,8 @@ export default function Navigation() {
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={NavLink} to="/">
+    <Navbar bg="danger" expand="lg">
+      <Navbar.Brand className="text-light" as={NavLink} to="/">
         <strong>BAND BUDDIES</strong>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

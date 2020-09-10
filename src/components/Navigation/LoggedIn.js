@@ -18,7 +18,7 @@ export default function LoggedIn() {
       {user ? <NavbarItem path="/create-listing" linkText="Create a Listing" /> : null}
       {user ? <NavbarItem path="/profile" linkText="My Profile" /> : null}
       {/* <Nav.Item style={{ padding: ".5rem 1rem" }}>{user.username}</Nav.Item> */}
-      <Button onClick={() => {
+      <Button variant="light" onClick={() => {
         dispatch(logOut())
         history.push("/login")
       }}>Logout</Button>

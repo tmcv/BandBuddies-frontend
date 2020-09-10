@@ -63,7 +63,7 @@ export default function SendMail() {
           </Form.Group>
 
           <Form.Group className="mt-5">
-            <Button variant="primary" type="submit" onClick={submitForm}>
+            <Button variant="dark" type="submit" onClick={submitForm}>
               Send Message
             </Button>
           </Form.Group>

@@ -1,5 +1,5 @@
 import React from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
+import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -12,16 +12,18 @@ export default function Listing(props) {
   const levelsList = [null, 'beginner', 'intermediate', 'advanced', 'semi-professional', 'professional']
 
   return (
-    <Jumbotron>
-      <h1>{props.title}</h1>
-      <p>Type: {props.isBand ? "Musician looking for a band" : "Band or group looking for a musician"}</p>
-      {props.showLink ? (
-        <div>
-          <Link to={`/listings/${props.id}`}>
-            <Button>Details</Button>
-          </Link>
-        </div>
-      ) : null}
-    </Jumbotron>
+    <Card bg="light" className="mb-4 text-left">
+      <Card.Header>{props.title}</Card.Header>
+      <Card.Body>
+        <p>Type: {props.isBand ? "Musician looking for a band" : "Band or group looking for a musician"}</p>
+        {props.showLink ? (
+          <div>
+            <Link to={`/listings/${props.id}`}>
+              <Button variant="dark">Details</Button>
+            </Link>
+          </div>
+        ) : null}
+      </Card.Body>
+    </Card>
   );
 }
