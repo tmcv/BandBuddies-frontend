@@ -54,6 +54,7 @@ export default function SendMail() {
           <div><strong>Subject: </strong>{subject}</div>
           <Form.Group controlId="formBasicText">
             <Form.Control
+              as="textarea"
               value={text}
               onChange={event => setText(event.target.value)}
               type="text"

@@ -46,7 +46,7 @@ export default function CreateListing() {
 
   return (
     <Container>
-      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
+      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5 text-left">
         <h1 className="mt-5 mb-5">Create a Search Listing</h1>
         <Form.Group controlId="formBasicTitle">
           <Form.Label>Title</Form.Label>
