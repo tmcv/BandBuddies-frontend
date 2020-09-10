@@ -10,20 +10,20 @@ import Listing from "../../components/Listing";
 
 export default function Listings() {
   const dispatch = useDispatch();
-  const listings = useSelector(selectListings);
+  const fetchedListings = useSelector(selectListings);
   const user = useSelector(selectUser);
   const [filterForUser, setFilterForUser] = useState(user.token ? true : false)
-
   useEffect(() => {
     dispatch(fetchListings());
   }, [dispatch]);
   
-  // console.log("listings:", listings)
+  console.log("listings:", fetchedListings)
 
   console.log("USER:", user)
-  const visibleListings = filterForUser ? listings.filter(listing => {
-    return listing.minimumLevel <= user.level && listing.isBand !== user.isBand
-  }) : listings;
+
+  const visibleListings = filterForUser ? fetchedListings.filter(listing => {
+    return listing.minimumLevel <= user.level && listing.isBand === user.isBand
+  }) : fetchedListings;
 
   return (
     <>
@@ -34,17 +34,19 @@ export default function Listings() {
         {user.token ? 
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check checked={filterForUser} type="checkbox" label="Filter for me!" onChange={() => setFilterForUser(!filterForUser)}/>
-          </Form.Group> : <div> Please login to filter for personalised listings </div>
+          </Form.Group> : <div> <strong>Please login to filter or to see more details</strong> </div>
         }
+        <p></p>
         {visibleListings.map(listing => {
           return (
             <Listing
               key={listing.id}
               id={listing.id}
               title={listing.title}
+              isBand={listing.isBand}
               minimumLevel={listing.minimumLevel}
               description={listing.description}
-              showLink={true}
+              showLink={user.token ? true : false}
             />
           );
         })}

@@ -16,6 +16,9 @@ import Login from './pages/Login';
 import CreateListing from './pages/CreateListing';
 import ListingCreated from './pages/CreateListing/listingCreated';
 import ProfilePage from './pages/ProfilePage';
+import SendMail from './pages/Mail';
+import MailSent from './pages/Mail/MailSent';
+import ListingDetailsPage from './pages/ListingDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,12 +34,15 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route path="/listings" component={Listings} />
+        <Route exact path="/listings" component={Listings} />
+        <Route path="/listings/:id" component={ListingDetailsPage} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/create-listing" component={CreateListing} />
         <Route path="/listing-created" component={ListingCreated} />
         <Route path="/profile" component={ProfilePage} />
+        <Route exact path="/mail" component={SendMail} />
+        <Route path="/mail/sent" component={MailSent} />
       </Switch>
     </div>
   );

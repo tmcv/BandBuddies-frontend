@@ -20,7 +20,7 @@ export default function SignUp() {
   const [isBand, setIsBand] = useState(false);
   const [level, setLevel] = useState(1);
   const [style, setStyle] = useState();
-  const [instrument, setInstrument] = useState();
+  const [instrument, setInstrument] = useState(1);
   console.log("ISBAND AT THE START", isBand)
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
@@ -63,7 +63,7 @@ export default function SignUp() {
     setIsBand(isBand);
     setLevel(1);
     setStyle();
-    setInstrument();
+    setInstrument(1);
   }
 
   return (
@@ -163,7 +163,7 @@ export default function SignUp() {
         </Form.Group>
         
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button variant="dark" type="submit" onClick={submitForm}>
             Sign up
           </Button>
         </Form.Group>

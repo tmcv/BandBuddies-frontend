@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Jumbotron from "react-bootstrap/Jumbotron";
-import Container from "react-bootstrap/Container";
+import ListGroup from "react-bootstrap/ListGroup";
 
 export default function Profile(props) {
   console.log("PROPS:", props)
@@ -11,20 +11,28 @@ export default function Profile(props) {
 
   return (
     <Jumbotron>
-      <h1>Name: {props.name}</h1>
-      <p>Type: {userType}</p>
-      <ul><strong>Instruments:</strong> {instrumentsList.map(i => {
-        return <li>{i.title}</li>
-      })}</ul>
-      <p>Level: {props.level}</p>
-      <ul><strong>Styles:</strong> {stylesList.map(s => {
-        return <li>{s.title}</li>
-      })}</ul>
-      {/* {props.showLink ? (
-        <Link to={`/listings/${props.id}`}>
-          <Button>Contact User</Button>
-        </Link>
-      ) : null} */}
+      <div className="container">
+        <img className="mb-4" src="https://www.uokpl.rs/fpng/f/346-3462839_round-profile-image.png" width={150}/>
+        <h1>Name: {props.name}</h1>
+        <ListGroup className="text-left">
+          <ListGroup.Item>
+            <strong>Type:</strong> {userType}
+          </ListGroup.Item>
+          {userType === "Band or Group" ? null : (
+            <ListGroup.Item>
+              <strong>Instruments: </strong> 
+              {instrumentsList.map(i => i.title).join(", ")}
+            </ListGroup.Item>
+          )}
+          <ListGroup.Item>
+            <strong>Level:</strong> {props.level}
+          </ListGroup.Item>
+          <ListGroup.Item>
+            <strong>Styles: </strong> 
+            {stylesList.map(s => s.title).join(", ")}
+          </ListGroup.Item>
+        </ListGroup>
+      </div>
     </Jumbotron>
   )
 }

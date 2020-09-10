@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 export default function NavbarItem(props) {
   return (
     <Nav.Item>
-      <Nav.Link as={NavLink} to={props.path}>
-        {props.linkText}
+      <Nav.Link className="text-light" as={NavLink} to={props.path}>
+        <strong>{props.linkText}</strong>
       </Nav.Link>
     </Nav.Item>
   );
