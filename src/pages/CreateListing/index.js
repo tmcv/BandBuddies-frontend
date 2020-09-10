@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -6,25 +6,38 @@ import { createListing } from '../../store/listings/actions';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { selectUser } from "../../store/user/selectors";
+import { selectStyles } from "../../store/styles/selectors";
+import { selectInstruments } from "../../store/instruments/selectors";
+import { fetchStyles } from "../../store/styles/actions";
+import { fetchInstruments } from "../../store/instruments/actions";
+import { getUserWithStoredToken } from "../../store/user/actions";
 import { Col } from "react-bootstrap";
 
 
 export default function CreateListing() {
   const [title, setTitle] = useState("")
-  const [minimumLevel, setMinimumLevel] = useState(0)
+  const [minimumLevel, setMinimumLevel] = useState(1)
   const [description, setDescription] = useState("")
-  const [style, setStyle] = useState("")
-  const [instrument, setInstrument] = useState("")
+  const [style, setStyle] = useState()
+  const [instrument, setInstrument] = useState(1)
   const dispatch = useDispatch()
   const history = useHistory()
   const user = useSelector(selectUser)
-  const isBand = !user.isBand
+  const styles = useSelector(selectStyles);
+  const instruments = useSelector(selectInstruments);
+  const isBand = !user.isBand;
   console.log("isBand for listing:", isBand)
+  console.log({user})
+  
+  useEffect (() => {
+    dispatch(fetchStyles());
+    dispatch(fetchInstruments());
+  }, [dispatch]);
 
 
   async function submitForm () {
     try {
-      await dispatch(createListing(title, minimumLevel, style, instrument, description, isBand))
+      await dispatch(createListing(title, minimumLevel, isBand, description, style, instrument))
       history.push("/listing-created")
     } catch (err) {
       console.log(err)
@@ -56,28 +69,6 @@ export default function CreateListing() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicStyle">
-          <Form.Label>Style</Form.Label>
-          <Form.Control
-            value={style}
-            onChange={event => setStyle(event.target.value)}
-            type="style"
-            placeholder="style"
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formBasicInstrument">
-          <Form.Label>Instrument</Form.Label>
-          <Form.Control
-            value={instrument}
-            onChange={event => setInstrument(event.target.value)}
-            type="instrument"
-            placeholder="instrument"
-            required
-          />
-        </Form.Group>
-
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Minimum level</Form.Label>
           <Form.Control as="select" onChange={event => {
@@ -91,6 +82,34 @@ export default function CreateListing() {
             <option value={5}>5: professional</option>
           </Form.Control>
         </Form.Group>
+
+        <Form.Group controlId="form.styles">
+          <Form.Label>Select desired style</Form.Label>
+          <Form.Control as="select" onChange={event => {
+            console.log("style is currently:", event.target.value)
+            setStyle(event.target.value)
+          }}>
+            <option />
+            {styles.map(s => {
+              return <option key={s.id} value={s.id}>{s.title}</option>
+            })}
+          </Form.Control>
+        </Form.Group>
+        
+        {user.isBand===false ? null : (
+          <Form.Group controlId="form.instruments">
+            <Form.Label>Select desired instrument</Form.Label>
+            <Form.Control as="select" onChange={event => {
+              console.log("instrument is currently:", event.target.value)
+              setInstrument(event.target.value)
+            }}>
+              <option />
+              {instruments.map(i => {
+                return <option key={i.id} value={i.id}>{i.title}</option>
+              })}
+            </Form.Control>
+          </Form.Group>
+        )}
 {/* 
         <input type = "checkbox" id = "checkBand" value = {!isBand} onChange={event => {
           console.log("EVENT-TARGET-VALUE", event.target.value)
