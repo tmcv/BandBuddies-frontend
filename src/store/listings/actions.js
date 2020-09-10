@@ -22,18 +22,21 @@ export const fetchListings = () => {
   };
 };
 
-export const createListing = (title, minimumLevel, description) => {
+export const createListing = (title, minimumLevel, isBand, description, style, instrument) => {
   return async (dispatch, getState) => {
     const state = getState();
     const response = await axios.post(`${apiUrl}/listings`, {
       title,
       minimumLevel,
-      description
+      isBand,
+      description,
+      style,
+      instrument: instrument ? instrument : null
     }, {
       headers: { Authorization: `Bearer ${selectToken(state)}` }
     })
 
     console.log("RESPONSE:", response)
-    dispatch({type: CREATE_LISTING_SUCCESS, payload: response.data.listing});
+    dispatch({type: CREATE_LISTING_SUCCESS, payload: response.data.newListing});
   };
 };
