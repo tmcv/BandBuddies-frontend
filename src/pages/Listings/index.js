@@ -21,7 +21,7 @@ export default function Listings() {
  
   console.log("USER:", user)
 
-  const userInstrumentsList = filterForUser ? (
+  const userInstrumentsList = user.id ? (
     user.instruments.map(instrument => {
       return instrument.id
     })
@@ -29,7 +29,7 @@ export default function Listings() {
 
   console.log("USERINSTRUMENTSLIST:", userInstrumentsList)
   
-  const filteredListings = filterForUser ? (
+  const filteredListings = user.id ? (
     fetchedListings.filter(listing => {
       console.log("filtering listing with ID:", listing.id)
       return (userInstrumentsList.includes(listing.instruments[0]))
