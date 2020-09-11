@@ -13,6 +13,7 @@ export default function Listings() {
   const fetchedListings = useSelector(selectListings);
   const user = useSelector(selectUser);
   const [filterForUser, setFilterForUser] = useState(user.token ? true : false)
+  
   useEffect(() => {
     dispatch(fetchListings());
   }, [dispatch]);

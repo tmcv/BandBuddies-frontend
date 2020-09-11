@@ -26,7 +26,7 @@ export default function SendMail() {
   useEffect (() => { 
     checkForListing()
     dispatch(getUserWithStoredToken());
-  });
+  }, [dispatch]);
 
   console.log("user:", user)
   console.log("specific listing:", fetchedListing)
