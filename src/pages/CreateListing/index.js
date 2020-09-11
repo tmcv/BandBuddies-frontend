@@ -10,7 +10,6 @@ import { selectStyles } from "../../store/styles/selectors";
 import { selectInstruments } from "../../store/instruments/selectors";
 import { fetchStyles } from "../../store/styles/actions";
 import { fetchInstruments } from "../../store/instruments/actions";
-import { getUserWithStoredToken } from "../../store/user/actions";
 import { Col } from "react-bootstrap";
 
 

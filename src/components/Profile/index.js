@@ -12,7 +12,7 @@ export default function Profile(props) {
   return (
     <Jumbotron>
       <div className="container">
-        <img className="mb-4" src="https://www.uokpl.rs/fpng/f/346-3462839_round-profile-image.png" width={150}/>
+        <img alt="profile" className="mb-4" src="https://www.uokpl.rs/fpng/f/346-3462839_round-profile-image.png" width={150}/>
         <h1>Name: {props.name}</h1>
         <ListGroup className="text-left">
           <ListGroup.Item>

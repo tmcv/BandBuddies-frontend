@@ -2,14 +2,9 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectToken } from "../../store/user/selectors";
 
 export default function Listing(props) {
   console.log("props:", props)
-  const token = useSelector(selectToken);
-
-  const levelsList = [null, 'beginner', 'intermediate', 'advanced', 'semi-professional', 'professional']
 
   return (
     <Card bg="light" className="mb-4 text-left">

@@ -18,10 +18,27 @@ export default function Listings() {
   }, [dispatch]);
   
   console.log("listings:", fetchedListings)
-
+ 
   console.log("USER:", user)
 
-  const visibleListings = filterForUser ? fetchedListings.filter(listing => {
+  const userInstrumentsList = user.id ? (
+    user.instruments.map(instrument => {
+      return instrument.id
+    })
+  ) : []
+
+  console.log("USERINSTRUMENTSLIST:", userInstrumentsList)
+  
+  const filteredListings = user.id ? (
+    fetchedListings.filter(listing => {
+      console.log("filtering listing with ID:", listing.id)
+      return (userInstrumentsList.includes(listing.instruments[0]))
+    })
+  ) : fetchedListings
+
+  console.log("new list of listings:", filteredListings)
+
+  const visibleListings = filterForUser ? filteredListings.filter(listing => {
     return listing.minimumLevel <= user.level && listing.isBand === user.isBand
   }) : fetchedListings;
 
